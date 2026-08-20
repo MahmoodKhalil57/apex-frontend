@@ -1,0 +1,102 @@
+{
+	"$schema": "../../schemas/entry.schema.json",
+	"id": "post-email",
+	"status": "published",
+	"data": {
+		"title": "Branded email from your own domain",
+		"excerpt": "Sign-in links and notifications send from no-reply@yourdomain.com — verified with three DNS records, powered by Amazon SES.",
+		"content": [
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k11",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "From the moment a site is provisioned it can send email — sign-in links, notifications — from its assigned subdomain. Connect a custom domain and the platform provisions a sending identity for it on Amazon SES.",
+						"_key": "k10"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k13",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Three records to verified",
+						"_key": "k12"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k17",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Settings → DNS lists three DKIM CNAME records plus an MX and SPF pair for the bounce address. Add them at your DNS host; when DKIM verifies, sending flips automatically from the assigned subdomain to ",
+						"_key": "k14"
+					},
+					{
+						"_type": "span",
+						"text": "no-reply@yourdomain.com",
+						"_key": "k15",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": ". No mailbox migration, no third-party sender showing in headers.",
+						"_key": "k16"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k19",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Deliverability by default",
+						"_key": "k18"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k23",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Mail is signed with your domain's DKIM keys and uses a dedicated MAIL FROM subdomain (",
+						"_key": "k20"
+					},
+					{
+						"_type": "span",
+						"text": "notify.yourdomain.com",
+						"_key": "k21",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": "), so SPF, DKIM, and DMARC alignment work the way mailbox providers expect.",
+						"_key": "k22"
+					}
+				]
+			}
+		]
+	}
+}

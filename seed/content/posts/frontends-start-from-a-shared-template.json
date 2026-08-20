@@ -1,0 +1,102 @@
+{
+	"$schema": "../../schemas/entry.schema.json",
+	"id": "post-template",
+	"status": "published",
+	"data": {
+		"title": "Frontends start from a shared template",
+		"excerpt": "New frontend repositories are generated from a maintained base image: a static Astro build of the CMS theme, wired to your content, with content-as-code seeds.",
+		"content": [
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k39",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "One-click frontends are now generated from a shared template repository — a base image, the same way every site runs the same golden CMS build. The template is a static Astro build of the CMS theme: same layout, same design tokens, pre-rendered against your content at deploy time.",
+						"_key": "k38"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k41",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Content as code",
+						"_key": "k40"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k45",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Each repository carries a ",
+						"_key": "k42"
+					},
+					{
+						"_type": "span",
+						"text": "seed/seed.json",
+						"_key": "k43",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": ": a living content migration applied to your CMS on every deploy, before the build. Commit a content change, push, and the deploy publishes it — with update-on-conflict semantics, so the seed can keep evolving through the development cycle. Sensitive values never enter the repo; the seed resolves them from workflow environment variables.",
+						"_key": "k44"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k47",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Fail-soft builds",
+						"_key": "k46"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k51",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "If the CMS is unreachable at build time, the build still succeeds with the identity baked into ",
+						"_key": "k48"
+					},
+					{
+						"_type": "span",
+						"text": "src/config.ts",
+						"_key": "k49",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": " — a deploy never breaks because of a network blip.",
+						"_key": "k50"
+					}
+				]
+			}
+		]
+	}
+}

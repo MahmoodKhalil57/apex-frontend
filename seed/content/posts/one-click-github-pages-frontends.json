@@ -1,0 +1,102 @@
+{
+	"$schema": "../../schemas/entry.schema.json",
+	"id": "post-pages",
+	"status": "published",
+	"data": {
+		"title": "One-click GitHub Pages frontends",
+		"excerpt": "Connect GitHub, click once, and your site's frontend lives in a repository you own — built by Actions, served on your domain, no DNS changes.",
+		"content": [
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k25",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Your site's public frontend can live in a GitHub repository you own. Connect GitHub in Settings → General and one click creates the repo, sets up a deploy workflow, and configures GitHub Pages.",
+						"_key": "k24"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k27",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Served on your domain automatically",
+						"_key": "k26"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k33",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "The platform reverse-proxies the Pages build on your site's own domain. There are no DNS records to add and nothing to configure at GitHub — push to ",
+						"_key": "k28"
+					},
+					{
+						"_type": "span",
+						"text": "main",
+						"_key": "k29",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": " and the deploy is live on your domain when the workflow finishes. The CMS admin stays at ",
+						"_key": "k30"
+					},
+					{
+						"_type": "span",
+						"text": "/_emdash/admin",
+						"_key": "k31",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": " on the same domain.",
+						"_key": "k32"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k35",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Shadow only what you build",
+						"_key": "k34"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k37",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Routes the frontend implements replace the CMS-rendered page; everything else — search, feeds, detail pages you have not built yet — falls through to the CMS. You can take over the site one page at a time.",
+						"_key": "k36"
+					}
+				]
+			}
+		]
+	}
+}

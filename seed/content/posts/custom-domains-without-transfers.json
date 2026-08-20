@@ -1,0 +1,76 @@
+{
+	"$schema": "../../schemas/entry.schema.json",
+	"id": "post-domains",
+	"status": "published",
+	"data": {
+		"title": "Custom domains without transfers",
+		"excerpt": "Point your domain at your site with a handful of DNS records. It never changes registrars, never changes nameservers, and never leaves your control.",
+		"content": [
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k1",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Every site on PremiumCMS starts on an assigned subdomain. When you are ready to serve it on your own domain, you set the Site URL in Settings → General and the platform issues the exact DNS records to add at your registrar — a CNAME for the site and a short set of records for email. Nothing else moves.",
+						"_key": "k0"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k3",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "No transfers, ever",
+						"_key": "k2"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k5",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "We never ask you to transfer a domain or delegate nameservers. Your DNS host stays your DNS host. The records route traffic to your isolated instance and prove ownership for the TLS certificate; the platform polls until they resolve and activates automatically.",
+						"_key": "k4"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k7",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "One-shot record apply",
+						"_key": "k6"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k9",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "If your DNS host is Cloudflare or Simply.com, Settings → DNS can apply the records for you: paste an API key, it is used once server-side for that batch of records, and it is never stored — you enter it again next time.",
+						"_key": "k8"
+					}
+				]
+			}
+		]
+	}
+}
