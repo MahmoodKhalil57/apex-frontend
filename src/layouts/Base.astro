@@ -1,0 +1,126 @@
+---
+import { getMenu, getSiteSettings } from "../lib/emdash";
+import { getLayout, renderLayoutSection, fillLayoutSlots } from "../lib/layout";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+}
+
+const { title, pageTitle, description, image, canonical } = Astro.props;
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSettings());
+const fullTitle = title.includes(siteTitle) ? title : `${title} — ${siteTitle}`;
+const pageDescription = description ?? siteTagline;
+
+const menu = await getMenu("primary");
+
+// Designer-owned chrome: the `site-header` / `site-footer` SECTIONS
+// (Manage → Sections) render instead of the built-in header/footer when
+// they exist — page-builder blocks whose [data-menu] / [data-widget-area] /
+// [data-site-title] / [data-theme-switcher] markers are filled from the
+// CMS at build time.
+const layout = await getLayout();
+const site = { title: siteTitle, tagline: siteTagline };
+const headerHtml = renderLayoutSection(layout, "site-header", site);
+const footerHtml = renderLayoutSection(layout, "site-footer", site);
+
+// Built-in footer shows the `sidebar` widget area (Manage → Widgets).
+const footerWidgets = fillLayoutSlots('<div data-widget-area="sidebar"></div>', layout, site);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		{pageDescription && <meta name="description" content={pageDescription} />}
+		{canonical && <link rel="canonical" href={canonical} />}
+		<meta property="og:title" content={pageTitle ?? title} />
+		{pageDescription && <meta property="og:description" content={pageDescription} />}
+		{image && <meta property="og:image" content={image} />}
+		<script is:inline>
+			// Apply an explicit theme choice immediately (shared cookie with the
+			// CMS-rendered pages); harmless when the design has no theming.
+			(function () {
+				var c = document.cookie;
+				var i = c.indexOf("theme=");
+				var theme = i >= 0 ? c.slice(i + 6).split(";")[0] : null;
+				if (theme === "dark" || theme === "light") {
+					document.documentElement.classList.add(theme);
+				}
+			})();
+		</script>
+	</head>
+	<body>
+		{headerHtml ? <div class="layout-slot" set:html={headerHtml} /> : (
+		<header>
+			<nav>
+				<a href="/">{siteTitle}</a>
+				{
+					menu?.items.map((item) => (
+						<a href={item.url} target={item.target}>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</header>
+		)}
+
+		<main>
+			<slot />
+		</main>
+
+		{footerHtml ? <div class="layout-slot" set:html={footerHtml} /> : (
+		<footer>
+			<Fragment set:html={footerWidgets} />
+		</footer>
+		)}
+
+		<script>
+			// Theme switcher buttons (present when a designed section includes a
+			// [data-theme-switcher] marker); shares the `theme` cookie with the CMS.
+			const themeBtns = document.querySelectorAll<HTMLButtonElement>(".theme-btn");
+			if (themeBtns.length > 0) {
+				const root = document.documentElement;
+				const setCookie = (value: string) => {
+					const secure = location.protocol === "https:" ? "; Secure" : "";
+					document.cookie =
+						value === ""
+							? `theme=; path=/; max-age=0; SameSite=Lax${secure}`
+							: `theme=${value}; path=/; max-age=31536000; SameSite=Lax${secure}`;
+				};
+				const setTheme = (theme: string) => {
+					if (theme === "system") {
+						setCookie("");
+						root.classList.remove("light", "dark");
+					} else {
+						setCookie(theme);
+						root.classList.remove("light", "dark");
+						root.classList.add(theme);
+					}
+					themeBtns.forEach((btn) => btn.classList.toggle("active", btn.dataset.theme === theme));
+				};
+				const match = document.cookie.match(/theme=([^;]+)/);
+				setTheme(match?.[1] ?? "system");
+				themeBtns.forEach((btn) => {
+					btn.addEventListener("click", () => setTheme(btn.dataset.theme || "system"));
+				});
+			}
+		</script>
+
+		<style is:global>
+			/* Layout sections render through wrappers; make them transparent to
+			   the page layout so position:sticky inside them works. */
+			.layout-slot,
+			.layout-slot .grapes-block {
+				display: contents;
+			}
+		</style>
+	</body>
+</html>

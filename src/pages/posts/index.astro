@@ -1,0 +1,36 @@
+---
+import Base from "../../layouts/Base.astro";
+import Image from "../../components/Image.astro";
+import { getEmDashCollection } from "../../lib/emdash";
+
+const { entries: posts } = await getEmDashCollection("posts");
+---
+
+<Base title="All Posts">
+	<h1>Posts</h1>
+
+	{
+		posts.length === 0 ? (
+			<p>No posts yet.</p>
+		) : (
+			<ul>
+				{posts.map((post) => (
+					<li>
+						<a href={`/posts/${post.id}`}>
+							{post.data.featured_image && <Image image={post.data.featured_image} />}
+							<h2>{post.data.title}</h2>
+						</a>
+						{post.data.excerpt && <p>{post.data.excerpt}</p>}
+						{(post.data.terms.tag ?? []).length > 0 && (
+							<div>
+								{(post.data.terms.tag ?? []).map((t) => (
+									<a href={`/tag/${t.slug}`}>{t.label}</a>
+								))}
+							</div>
+						)}
+					</li>
+				))}
+			</ul>
+		)
+	}
+</Base>

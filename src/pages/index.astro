@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import Image from "../components/Image.astro";
+import { getEmDashCollection, getSiteSettings } from "../lib/emdash";
+import { renderPortableText } from "../lib/pt";
+import { fillLayoutSlots, getLayout } from "../lib/layout";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+
+const [{ entries: posts }, { entries: pages }, settings, layout] = await Promise.all([
+	getEmDashCollection("posts", { limit: 50 }),
+	getEmDashCollection("pages", { limit: 50 }),
+	getSiteSettings(),
+	getLayout(),
+]);
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(settings);
+
+// Designer-owned homepage: when a CMS page with slug `home` exists, it IS
+// the homepage — a page-builder design, editable in the admin. Without one,
+// the starter's recent-posts list renders.
+const homePage = pages.find((p) => p.id === "home");
+const homeHtml = homePage
+	? fillLayoutSlots(renderPortableText(homePage.data.content), layout, { title: siteTitle, tagline: siteTagline })
+	: "";
+---
+
+<Base title={siteTitle} description={siteTagline}>
+	{
+		homeHtml ? (
+			<Fragment set:html={homeHtml} />
+		) : posts.length === 0 ? (
+			<p>
+				No posts yet. <a href="/_emdash/admin/content/posts/new">Create one</a>.
+			</p>
+		) : (
+			<>
+				<h1>Recent Posts</h1>
+				<ul>
+					{posts.slice(0, 10).map((post) => (
+						<li>
+							<a href={`/posts/${post.id}`}>
+								{post.data.featured_image && <Image image={post.data.featured_image} />}
+								<h2>{post.data.title}</h2>
+							</a>
+							{post.data.excerpt && <p>{post.data.excerpt}</p>}
+							{post.data.publishedAt && (
+								<time datetime={post.data.publishedAt.toISOString()}>
+									{post.data.publishedAt.toLocaleDateString("en-US", {
+										year: "numeric",
+										month: "long",
+										day: "numeric",
+									})}
+								</time>
+							)}
+						</li>
+					))}
+				</ul>
+			</>
+		)
+	}
+</Base>
