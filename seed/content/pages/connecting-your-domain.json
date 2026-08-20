@@ -1,0 +1,127 @@
+{
+	"$schema": "../../schemas/entry.schema.json",
+	"id": "page-domains-guide",
+	"status": "published",
+	"data": {
+		"title": "Connecting your domain",
+		"content": [
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k67",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Your site starts on an assigned subdomain and moves to your own domain with DNS records only. The domain itself never transfers and its nameservers never change.",
+						"_key": "k66"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k69",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "1. Set the Site URL",
+						"_key": "k68"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k71",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "In Settings → General, set the Site URL to the domain you own. The platform registers it and prepares the records.",
+						"_key": "k70"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k73",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "2. Add the records at your DNS host",
+						"_key": "k72"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k77",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "Settings → DNS lists everything: a CNAME (plus ",
+						"_key": "k74"
+					},
+					{
+						"_type": "span",
+						"text": "www",
+						"_key": "k75",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": ") routing the site to your instance, ownership and certificate records, and the email set — three DKIM CNAMEs plus MX and SPF for the bounce address. Add them wherever you manage DNS. If that is Cloudflare or Simply.com, paste an API key and the platform applies the batch server-side; the key is used once and never stored.",
+						"_key": "k76"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "h2",
+				"_key": "k79",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "3. Everything activates on its own",
+						"_key": "k78"
+					}
+				]
+			},
+			{
+				"_type": "block",
+				"style": "normal",
+				"_key": "k83",
+				"markDefs": [],
+				"children": [
+					{
+						"_type": "span",
+						"text": "The platform polls your records. The site goes live with a TLS certificate when the routing records resolve; email flips to ",
+						"_key": "k80"
+					},
+					{
+						"_type": "span",
+						"text": "no-reply@yourdomain.com",
+						"_key": "k81",
+						"marks": [
+							"code"
+						]
+					},
+					{
+						"_type": "span",
+						"text": " when DKIM verifies. Check status any time in Settings → DNS.",
+						"_key": "k82"
+					}
+				]
+			}
+		]
+	}
+}

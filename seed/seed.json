@@ -2,8 +2,12 @@
 	"$schema": "./schemas/seed.schema.json",
 	"version": "1",
 	"meta": {
-		"name": "Site seed",
-		"description": "Content-as-code for this site, applied on every deploy (update-on-conflict). Root settings live here; content entries live one-per-file under seed/content/<collection>/<slug>.json."
+		"name": "PremiumCMS site seed",
+		"description": "Content-as-code for premium-cms.com. Applied on every deploy (update-on-conflict); edit here, not in the admin, for anything this seed names."
+	},
+	"settings": {
+		"title": "PremiumCMS",
+		"tagline": "Isolated CMS instances on your clients' own domains"
 	},
 	"menus": [
 		{
@@ -17,13 +21,13 @@
 				},
 				{
 					"type": "custom",
-					"label": "Posts",
+					"label": "Changelog",
 					"url": "/posts"
 				},
 				{
 					"type": "custom",
-					"label": "Search",
-					"url": "/search"
+					"label": "About",
+					"url": "/pages/about"
 				}
 			]
 		}
@@ -32,6 +36,21 @@
 		{
 			"source": "/admin",
 			"destination": "/_emdash/admin",
+			"type": 302
+		},
+		{
+			"source": "/login",
+			"destination": "/_emdash/admin",
+			"type": 302
+		},
+		{
+			"source": "/blog",
+			"destination": "/posts",
+			"type": 301
+		},
+		{
+			"source": "/docs",
+			"destination": "/pages/connecting-your-domain",
 			"type": 302
 		}
 	],
@@ -43,7 +62,7 @@
 			"widgets": [
 				{
 					"type": "content",
-					"title": "About",
+					"title": "Platform",
 					"content": [
 						{
 							"_type": "block",
@@ -54,7 +73,7 @@
 								{
 									"_type": "span",
 									"_key": "w1",
-									"text": "Edit this widget under Manage → Widgets, or replace it in seed/seed.json."
+									"text": "Every site here runs the same golden build. What changed and when lives in the changelog."
 								}
 							]
 						}
