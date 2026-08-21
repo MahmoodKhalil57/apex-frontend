@@ -5,6 +5,78 @@
 		"name": "PremiumCMS site seed",
 		"description": "Content-as-code for premium-cms.com. Applied on every deploy (update-on-conflict); edit here, not in the admin, for anything this seed names."
 	},
+	"collections": [
+		{
+			"slug": "products",
+			"label": "Products",
+			"labelSingular": "Product",
+			"hasSeo": true,
+			"supports": [
+				"drafts",
+				"revisions",
+				"search"
+			],
+			"urlPattern": "/products/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "price",
+					"label": "Price",
+					"type": "number",
+					"required": true
+				},
+				{
+					"slug": "compare_at_price",
+					"label": "Compare-at price",
+					"type": "number"
+				},
+				{
+					"slug": "sku",
+					"label": "SKU",
+					"type": "string"
+				},
+				{
+					"slug": "stock",
+					"label": "Stock (blank = unlimited)",
+					"type": "integer"
+				},
+				{
+					"slug": "image",
+					"label": "Image",
+					"type": "image"
+				},
+				{
+					"slug": "summary",
+					"label": "Summary",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "requires_shipping",
+					"label": "Requires shipping",
+					"type": "boolean",
+					"defaultValue": true
+				},
+				{
+					"slug": "featured",
+					"label": "Featured",
+					"type": "boolean"
+				}
+			]
+		}
+	],
 	"settings": {
 		"title": "PremiumCMS",
 		"tagline": "Isolated CMS instances on your clients' own domains"
