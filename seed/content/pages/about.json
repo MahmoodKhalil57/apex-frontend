@@ -1,100 +1,16 @@
 {
-	"$schema": "../../schemas/entry.schema.json",
+	"$schema": "../../schemas/page.schema.json",
 	"id": "page-about",
 	"status": "published",
 	"data": {
-		"title": "About PremiumCMS",
+		"title": "About",
 		"content": [
 			{
-				"_type": "block",
-				"style": "normal",
-				"_key": "k53",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "PremiumCMS is a managed platform for running many content-managed sites without sharing anything between them. Every project is provisioned from one golden build into its own isolated instance: its own worker, its own database, its own file storage, its own domain, its own email identity.",
-						"_key": "k52"
-					}
-				]
-			},
-			{
-				"_type": "block",
-				"style": "h2",
-				"_key": "k55",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "The model",
-						"_key": "k54"
-					}
-				]
-			},
-			{
-				"_type": "block",
-				"style": "normal",
-				"_key": "k57",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "Most multi-site platforms share a database and separate tenants with rows and permissions. PremiumCMS separates them with infrastructure: a project's data lives in a database that belongs only to that project, and deleting a project destroys every resource it was issued — completely, with nothing left to bill or leak.",
-						"_key": "k56"
-					}
-				]
-			},
-			{
-				"_type": "block",
-				"style": "h2",
-				"_key": "k59",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "Who it is for",
-						"_key": "k58"
-					}
-				]
-			},
-			{
-				"_type": "block",
-				"style": "normal",
-				"_key": "k61",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "Agencies, studios, and vendors who hand sites to clients. Your client gets an admin login, a custom domain that never leaves their registrar, email that sends from their own address, and a frontend repository they own on GitHub. You get one codebase to maintain and a registry of every site you run.",
-						"_key": "k60"
-					}
-				]
-			},
-			{
-				"_type": "block",
-				"style": "h2",
-				"_key": "k63",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "What runs underneath",
-						"_key": "k62"
-					}
-				]
-			},
-			{
-				"_type": "block",
-				"style": "normal",
-				"_key": "k65",
-				"markDefs": [],
-				"children": [
-					{
-						"_type": "span",
-						"text": "Instances run on Cloudflare Workers with D1 and R2, email is delivered through Amazon SES, and frontends deploy through GitHub Actions to GitHub Pages — proxied onto each site's own domain by its worker.",
-						"_key": "k64"
-					}
-				]
+				"_type": "grapesBlock",
+				"_key": "about-design",
+				"html": "<article class=\"es-page\">\n  <h1>About</h1>\n  <p>We started with one question: why is it so hard to buy a plain t-shirt that fits well, feels good and still looks new a year later? The answer was usually cheap cotton, loose cuts and dye that washes out.</p>\n  <p>So we make a short list of tees and get each one right. The fabric is GOTS-certified organic cotton, ringspun for softness and knitted to two weights — 200 gsm for everyday and 260 gsm for heavyweight. Every piece is sewn first and dyed after, which is slower and costs more, but it means the colour is in the fibre, not on it.</p>\n  <h2>Made responsibly</h2>\n  <p>Our tees are made in a family-run factory we visit every year, paying above the local living wage. Packaging is recycled paper, no plastic.</p>\n  <h2>Questions</h2>\n  <p>Reply to any email from us — a person reads every one.</p>\n</article>",
+				"css": ".es-page{max-width:46rem;margin:0 auto;padding:2rem 0 4rem}.es-page h1{font-size:2.25rem;letter-spacing:-.02em;margin:0 0 1rem}.es-page h2{font-size:1.35rem;margin:2rem 0 .75rem}.es-page p,.es-page li{color:var(--color-text-secondary,#444);line-height:1.65}\n.es-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}.es-table th,.es-table td{padding:.6rem .75rem;border-bottom:1px solid var(--color-border-subtle,#eee);text-align:start}.es-table th{font-weight:600}",
+				"project": null
 			}
 		]
 	}

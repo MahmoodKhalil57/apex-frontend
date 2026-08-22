@@ -1,4 +1,9 @@
-# PremiumCMS frontend template
+# PremiumCMS Ecom theme
+
+A production-ready apparel storefront for [PremiumCMS](https://premium-cms.com): t-shirts with sizes, a bag, Stripe or Polar checkout (configured in the Commerce plugin settings), size guide, shipping & returns pages — every page designed in the admin page builder. Same code hosted by PremiumCMS or on GitHub Pages.
+
+Built on the official PremiumCMS theme; `src/` is kept in sync with it, `seed/` is this theme's content.
+
 
 The base image for a PremiumCMS site's frontend: the official **EmDash
 starter theme**, made fully static and headless. When you click **Set up
@@ -96,3 +101,31 @@ bun install
 bun run dev          # content from the CMS_URL in src/config.ts
 bun run seed         # apply seed/ to the CMS (needs CMS_SEED_TOKEN)
 ```
+
+## Product options (configurable products)
+
+A product's `options` field is a JSON list of fields — the same model the Forms plugin uses — with pricing:
+
+```json
+[
+  { "id": "collar", "type": "radio", "label": "Collar", "name": "collar", "required": true,
+    "options": [ { "value": "crew", "label": "Crew neck" }, { "value": "vneck", "label": "V-neck", "priceDelta": 2 } ] },
+  { "id": "colour", "type": "swatch", "label": "Colour", "name": "colour", "required": true,
+    "options": [ { "value": "white", "label": "White", "color": "#fff" }, { "value": "sand", "label": "Sand", "color": "#d9c8a9", "stock": 25 } ] },
+  { "id": "preset", "type": "image-choice", "label": "Print", "name": "preset",
+    "condition": { "field": "print_type", "op": "eq", "value": "preset" },
+    "options": [ { "value": "wave", "label": "Waves", "image": "https://…/wave.svg", "priceDelta": 6 } ] },
+  { "id": "design", "type": "design", "label": "Your design", "name": "design", "priceDelta": 8,
+    "design": { "areas": [ { "id": "front", "label": "Front", "width": 600, "height": 800, "previewImage": "https://…", "printBox": { "x": 33, "y": 28, "w": 34, "h": 44 } } ],
+                "presets": [ { "id": "wave", "label": "Waves", "image": "https://…/wave.svg" } ],
+                "allowText": true, "allowUpload": true, "allowShapes": true, "uploadPriceDelta": 3, "maxLayers": 12 } },
+  { "id": "note", "type": "text", "label": "Gift note", "name": "note", "validation": { "maxLength": 140 } }
+]
+```
+
+- Types: `text`, `textarea`, `number`, `email`, `tel`, `url`, `date`, `select`, `radio`, `checkbox`, `checkbox-group`, `swatch` (colour chips), `image-choice` (pictures), `design` (print builder), `hidden`.
+- `priceDelta` on a choice (or on a whole field for text/checkbox/design) is added to the base price — recomputed on the server at checkout; the client never sets prices.
+- `condition`: `{ field, op: eq | neq | filled | empty | in | nin, value }` shows a field only when another has a value.
+- `stock` on a choice tracks inventory for that choice on top of the product's stock.
+- `sizes` (comma list) is a shortcut for a required `size` select.
+- Designs are validated (fonts, colours, bounds, presets, verified uploads) and exported as SVG for production via `orders/design`.

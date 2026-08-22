@@ -22,7 +22,15 @@ export interface MenuItem {
 	target?: string;
 }
 
+export interface SiteKitConfig {
+	analytics: { ga4Id: string | null; gtmId: string | null; cfBeaconToken: string | null; searchConsoleToken: string | null };
+	consent: { title: string; text: string; privacyUrl: string } | null;
+	business: Record<string, unknown> | null;
+	reviewsConfigured: boolean;
+}
+
 export interface LayoutData {
+	siteKit: SiteKitConfig | null;
 	menus: Record<string, { label?: string; items: MenuItem[] }>;
 	widgetAreas: Record<
 		string,
@@ -31,12 +39,12 @@ export interface LayoutData {
 	sections: Record<string, { title?: string; content: PortableTextBlock[] }>;
 }
 
-const EMPTY: LayoutData = { menus: {}, widgetAreas: {}, sections: {} };
+const EMPTY: LayoutData = { siteKit: null, menus: {}, widgetAreas: {}, sections: {} };
 
 export async function getLayout(): Promise<LayoutData> {
 	const data = await fetchLayoutData();
 	if (!data) return EMPTY;
-	return { menus: data.menus ?? {}, widgetAreas: data.widgetAreas ?? {}, sections: data.sections ?? {} };
+	return { siteKit: (data.siteKit as SiteKitConfig | undefined) ?? null, menus: (data.menus as LayoutData["menus"] | undefined) ?? {}, widgetAreas: (data.widgetAreas as LayoutData["widgetAreas"] | undefined) ?? {}, sections: (data.sections as LayoutData["sections"] | undefined) ?? {} };
 }
 
 function menuLinks(items: MenuItem[]): string {
